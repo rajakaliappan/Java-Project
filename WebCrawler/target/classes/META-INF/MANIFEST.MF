@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Built-By: rajai
+Build-Jdk: 16.0.1
+Class-Path: lib/jsoup-1.13.1.jar
+Main-Class: com.proj.crawler.CrawlerInvocation
+Created-By: Maven Integration for Eclipse
+
