@@ -5,9 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.logging.FileHandler;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 public class CrawlerInvocation {
 	String result = "";
@@ -15,7 +13,7 @@ public class CrawlerInvocation {
 	String strLinks = null;
 	String strSearchWord = null;
 	String strOutputFile = null;
-    static Logger logger = Logger.getLogger("MyLog");
+    static Logger logger;
     
 	public static void configureLog() {    
     	logger = LogConfig.configureLog();
@@ -29,22 +27,32 @@ public class CrawlerInvocation {
 
 			File jarPath = new File(CrawlerInvocation.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 			String propertiesPath = jarPath.getParentFile().getAbsolutePath();
-			System.out.println("propertiesPath" + propertiesPath);
+			logger.info("properties file path " + propertiesPath);
 			prop.load(new FileInputStream(propertiesPath + "/config.properties"));
 			
 			// get the property value and print it out
 			strLinks = prop.getProperty("links");
 			strSearchWord = prop.getProperty("word");
-			logger.info("To search for word " + strSearchWord);
+			logger.info("To search for text " + strSearchWord);
 			strOutputFile = prop.getProperty("outputfile");
 			logger.info("Search results will be updated in " + strOutputFile);
 
+			if (null == strLinks || "".equalsIgnoreCase(strLinks)) {
+				logger.severe("URL is not provided");
+				throw new Exception("URL to crawl is not provided");
+			}
+		
+			if (null == strSearchWord || "".equalsIgnoreCase(strSearchWord)) {
+				logger.severe("text to search is empty");
+				throw new Exception("Text to search is not provided");
+			}
+			
 			if (null == strOutputFile || "".equalsIgnoreCase(strOutputFile)) {
 				logger.severe("Output file is empty");
 				throw new Exception("Output file is empty");
 			}
 		} catch (Exception e) {
-			logger.severe("Exception in reading properties file");
+			logger.severe("Exception in reading properties file " + e.getMessage());
 			System.exit(0);
 		} finally {
 			if (null != inputStream)
@@ -52,7 +60,11 @@ public class CrawlerInvocation {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
+		invokeCrawler();
+	}
+	
+	public static void invokeCrawler() {		
 		CrawlerInvocation crawler = new CrawlerInvocation();
 		//configure logging
 		configureLog();
@@ -78,5 +90,6 @@ public class CrawlerInvocation {
 		bwc.getArticles(crawler.strSearchWord,logger,crawler.strOutputFile);
 
 	}
+	
 
 }

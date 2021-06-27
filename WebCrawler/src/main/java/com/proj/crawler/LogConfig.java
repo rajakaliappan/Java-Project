@@ -13,7 +13,7 @@ public class LogConfig {
 	
 	    try { 	
 	        // This block configure the logger with handler and formatter  
-	        fh = new FileHandler("MyLogFile%g.log", 1024, 5, true);  
+	        fh = new FileHandler("MyLogFile%g.log", 102400, 8, true);  
 	        logger.addHandler(fh);
 	        SimpleFormatter formatter = new SimpleFormatter();  
 	        fh.setFormatter(formatter);
