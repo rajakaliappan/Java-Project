@@ -4,7 +4,7 @@ This project contains Web crawler which will search for word for given URL(s) an
 **Configuration needs to be updated in properties file for below**
   1. List of URL(s)
   2. Text to search
-  3. Stores the search result in Output File
+  3. Stores the search result of serach in Output File
 
 Dependency need to be setup as per below. Ensure below artifacts are available in same location
   1. Dependent jar jsoup-1.13.1.jar needs to be in lib/ folder
