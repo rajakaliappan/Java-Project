@@ -1,5 +1,5 @@
 # WebCrawler-v2
-This project contains Web crawler which will search for the given word for given URL(s) and stores the result in Output File
+This project contains Web crawler which will search for the given text in the provided URL(s) and stores the result in Output File
 
 **Configuration needs to be updated in properties file for search**
   1. List of URL(s)
@@ -13,6 +13,10 @@ Dependency need to be setup as per below. Ensure below artifacts are available i
   4. Have output.txt file created in the same location as per config.properties
 
 **Execution steps**:
-java -jar WebCrawler-0.0.1-SNAPSHOT.jar
+1. Standalone execution 
+   java -jar WebCrawler-0.0.1-SNAPSHOT.jar
+   The result of execution will be stored in output.txt file.
 
-The result of execution will be stored in output.txt file.
+2. Using the jar as library in any existig project and invoke below method
+   CrawlerInvocation.invokeCrawler()
+   
