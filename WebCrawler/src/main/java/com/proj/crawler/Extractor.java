@@ -16,6 +16,7 @@ public class Extractor {
     private static final int MAX_DEPTH = 2;
 	private HashSet<String> links;
     private List<List<String>> articles;
+    private Document htmlDocument;
     
     public Extractor() {
         links = new HashSet<String>();
@@ -34,6 +35,7 @@ public class Extractor {
         	logger.info(">> Depth: " + depth + " [" + URL + "]");
             try {
                 Document document = Jsoup.connect(URL).get();
+                this.htmlDocument =document;
                 Elements otherLinks = document.select("a[href]");
                 logger.info("Found (" + otherLinks.size() + ") links");
                 depth++;
@@ -55,7 +57,7 @@ public class Extractor {
      * 
      * @param strWordSearch - The word to search for in the articles
      */
-    public void getArticles(String strWordSearch,Logger logger) {
+    public void getArticles(String strWordSearch,Logger logger,String strFileName) {
         links.forEach(x -> {
             Document document;
             try {
@@ -71,9 +73,17 @@ public class Extractor {
                         articles.add(temporary);
                     }
                 }
+                if (strText.toLowerCase().contains(strWordSearch.toLowerCase()))
+                {
+                	ArrayList<String> temporary = new ArrayList<>();
+                    temporary.add("body search"); //The title of the article
+                    temporary.add("key found:" + strWordSearch); //The URL of the article
+                    articles.add(temporary);        	
+                }        
             } catch (IOException e) {
                 logger.severe(e.getMessage());
             }
+            writeToFile(strFileName,logger);
         });
     }
 
@@ -101,6 +111,6 @@ public class Extractor {
         } catch (IOException e) {
             logger.severe(e.getMessage());
         }
-    }
+    }   
     
 }

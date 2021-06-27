@@ -40,6 +40,7 @@ public class CrawlerInvocation {
 			logger.info("Search results will be updated in " + strOutputFile);
 
 			if (null == strOutputFile || "".equalsIgnoreCase(strOutputFile)) {
+				logger.severe("Output file is empty");
 				throw new Exception("Output file is empty");
 			}
 		} catch (Exception e) {
@@ -53,6 +54,7 @@ public class CrawlerInvocation {
 
 	public static void main(String[] args) {
 		CrawlerInvocation crawler = new CrawlerInvocation();
+		//configure logging
 		configureLog();
 		logger.info("Crawler Wrapper Initated");
 		try {
@@ -70,11 +72,10 @@ public class CrawlerInvocation {
 		
 		logger.info("Before invocation of crawler");
 		
-		for (String strLink : strTokens) {
+		for (String strLink : strTokens)
 			bwc.getPageLinks(strLink, 0,logger);
-			bwc.getArticles(crawler.strSearchWord,logger);
-			bwc.writeToFile(crawler.strOutputFile,logger);
-		}
+
+		bwc.getArticles(crawler.strSearchWord,logger,crawler.strOutputFile);
 
 	}
 
