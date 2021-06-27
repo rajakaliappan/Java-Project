@@ -1,7 +1,7 @@
 # WebCrawler-v2
-This project contains Web crawler which will search for word for given URL(s) and stores the result in Output File
+This project contains Web crawler which will search for the given word for given URL(s) and stores the result in Output File
 
-**Configuration needs to be updated in properties file for below**
+**Configuration needs to be updated in properties file for search**
   1. List of URL(s)
   2. Text to search
   3. Stores the search result of serach in Output File
