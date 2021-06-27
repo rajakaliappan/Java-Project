@@ -14,9 +14,9 @@ Dependency need to be setup as per below. Ensure below artifacts are available i
 
 **Execution steps**:
 1. Standalone execution 
-   java -jar WebCrawler-0.0.1-SNAPSHOT.jar
+   java -jar WebCrawler-0.0.1-SNAPSHOT.jar.
    The result of execution will be stored in output.txt file.
 
-2. Using the jar as library in any existig project and invoke below method
+2. Using the jar as library in any existig project and invoke below method.
    CrawlerInvocation.invokeCrawler()
    
