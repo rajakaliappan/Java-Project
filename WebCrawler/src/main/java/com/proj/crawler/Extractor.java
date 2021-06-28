@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 public class Extractor {
     private static final int MAX_DEPTH = 2;
-	private HashSet<String> links;
+    private HashSet<String> links;
     private List<List<String>> articles;
     private Document htmlDocument;
     
@@ -65,7 +65,7 @@ public class Extractor {
                 String strText = document.body().text();
                 Elements articleLinks = document.select("a[href]");             
                 for (Element article : articleLinks) {
-                	//Only retrieve the titles of the articles that contain Search
+                    //Only retrieve the titles of the articles that contain Search
                     if (article.text().toLowerCase().contains(strWordSearch.toLowerCase())) {
                     	ArrayList<String> temporary = new ArrayList<>();
                         temporary.add(article.text()); //The title of the article
@@ -75,9 +75,9 @@ public class Extractor {
                 }
                 if (strText.toLowerCase().contains(strWordSearch.toLowerCase()))
                 {
-                	ArrayList<String> temporary = new ArrayList<>();
-                    temporary.add("body search"); //The title of the article
-                    temporary.add("key found:" + strWordSearch); //The URL of the article
+                    ArrayList<String> temporary = new ArrayList<>();
+                    temporary.add("body search"); //Indicates text search in page body
+                    temporary.add("key found:" + strWordSearch); //Matched text
                     articles.add(temporary);        	
                 }        
             } catch (IOException e) {
