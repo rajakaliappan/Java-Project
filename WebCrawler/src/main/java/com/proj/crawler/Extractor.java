@@ -29,6 +29,7 @@ public class Extractor {
      * 
      * @param URL - The URL to search for
      * @param depth - Depth to which need to perform search
+     * @param logger - For logging purpose
      */
     public void getPageLinks(String URL,int depth,Logger logger) {
         if (!links.contains(URL) && (depth < MAX_DEPTH) && !URL.isEmpty()) {
@@ -56,6 +57,8 @@ public class Extractor {
      * Store value of matched title and URL in an Arraylist
      * 
      * @param strWordSearch - The word to search for in the articles
+     * @param logger - For logging purpose
+     * @param strFileName - Filename to store the search results     
      */
     public void getArticles(String strWordSearch,Logger logger,String strFileName) {
         links.forEach(x -> {
@@ -91,6 +94,7 @@ public class Extractor {
      * To store the search results in a file
      * 
      * @param filename - Filename where the search results are stored
+     * @param logger - For logging purpose     
      */    
     public void writeToFile(String filename,Logger logger) {
         FileWriter writer;
