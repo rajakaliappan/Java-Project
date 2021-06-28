@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Properties;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 public class CrawlerInvocation {
 	String result = "";
@@ -80,15 +82,18 @@ public class CrawlerInvocation {
 		// Invoke the Crawler
 		Extractor bwc = new Extractor();
 		// Get the links to search
-		String[] strTokens = crawler.strLinks.split(",");		
-		
-		logger.info("Before invocation of crawler");
-		
-		for (String strLink : strTokens)
-			bwc.getPageLinks(strLink, 0,logger);
+		String[] strTokens = crawler.strLinks.split(",");
 
+		logger.info("Before invocation of crawler");
+
+		Stream<String> stream = Arrays.asList(strTokens).stream();
+		stream.forEach(strLink -> bwc.getPageLinks(strLink, 0,logger));
+		
+		logger.info("Before searching and storing the results for given text");
+		
 		bwc.getArticles(crawler.strSearchWord,logger,crawler.strOutputFile);
 
+		logger.info("Searched completed");
 	}
 	
 
